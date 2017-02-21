@@ -7,11 +7,11 @@ var poemSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  autor : {
+  author : {
     type : String,
     required : true
   },
-  content:{
+  contents:{
     type: String, 
     required: true
   },
@@ -24,7 +24,6 @@ var poemSchema = new mongoose.Schema({
   }
   
 });
-
 
 poemSchema.pre("save", function(next) {
   return next();

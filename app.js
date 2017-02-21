@@ -8,14 +8,17 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var poems = require('./routes/poems');
+var poem = require('./routes/poem');
+var admin = require('./routes/admin');
 
 var db = mongoose.connection;
+
+mongoose.connect("mongodb://petercha:peter4682!@ds151279.mlab.com:51279/si_eum");
 
 db.once("open", function() {
   console.log("Database is connected");
 });
-mongoose.connect("mongodb://-------:-----------@ds019806.mlab.com:---------/si_eum");
+
 mongoose.Promise = require('bluebird');
 
 var app = express();
@@ -34,7 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/poem', poems);
+app.use('/poem', poem);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
