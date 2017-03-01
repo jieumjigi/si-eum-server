@@ -1,5 +1,38 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(align="center")
+    img(src="../images/logo.png" width = "250", height= "100")
+    br
+    br
+    div 
+      b Welcome to Jieumjigi :^) 
+    br
+    div 
+      b Poem Registeration Page.
+    br
+    br
+    form(action="/poem/addPoem" method="POST")
+        input(type="text" name="title" placeholder="Title of Poem")
+        br
+        br
+        
+        input(type="text" name="author" placeholder="Poet name")
+        br
+        br
+        input(type="text" name="introPoet" placeholder="Introducttion of poet")
+        br
+        br
+        input(type="text" name="linkToBook" placeholder="Address to the book link")
+        br
+        br
+        input(type="text" name="picUrlOfPoet" placeholder="Picture URL of poet.")
+        br
+        br
+        input(type="text" name="picUrl" placeholder = "Background Image URL")
+        br
+        br
+        textarea(placeholder="Poem Contents" name="contents" cols = "50" rows="10")
+        br
+        br
+        input(type="submit" value="Submit") 

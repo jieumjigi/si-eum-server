@@ -40,10 +40,17 @@ router.post("/addPoem/", function(req, res, next){
     var author = req.body.author;
     var contents = req.body.contents;
     var picUrl = req.body.picUrl;
-    console.log("hello ~~~~ ");
+    var introPoet = req.body.introPoet;
+    var linkToBook = req.body.linkToBook;
+    var picUrlOfPoet = req.body.picUrlOfPoet;
+    
+    
     var poem = new Poem({
         title : title,
         author : author,
+        introPoet : introPoet,
+        linkToBook : linkToBook,
+        picUrlOfPoet : picUrlOfPoet,
         contents : contents,
         picUrl : picUrl
     });
@@ -52,7 +59,7 @@ router.post("/addPoem/", function(req, res, next){
         if(err) return res.status(err.code).json({isSuccess: 0, err : err});
     });
     
-    return res.status(201).json({isSuccess: 1, msg : "A poem is successfully created!"});
+    return res.status(201).redirect('/');
 });
 
 module.exports = router;
