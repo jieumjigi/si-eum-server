@@ -10,3 +10,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+input {
+  width: 300px;
+}
+
+.btn {
+  width: 100px;
+}

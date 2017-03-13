@@ -2,15 +2,18 @@ var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird');
 
 var poemSchema = new mongoose.Schema({
-
+  poemId: String,
   title:{
     type: String,
     required: true
   },
-  author : {
+  poetName : {
     type : String,
     required : true
   },
+  introPoet : String,
+  linkToBook : String,
+  picUrlOfPoet : String,
   contents:{
     type: String, 
     required: true
@@ -18,6 +21,7 @@ var poemSchema = new mongoose.Schema({
   picUrl: {
     type: String
   },
+  pushDueDay: String,
   published_date: {
     type: Date,
     default: Date.now

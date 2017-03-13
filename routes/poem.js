@@ -2,7 +2,66 @@ var express = require('express');
 var router = express.Router();
 var Poem = require("../models/poem");
 
-/* GET users listing. */
+
+
+router.get('/', function(req, res, next) {
+   
+    Poem.find({}).sort({published_date : -1}).exec(function(err, poems){
+        if(err){
+            return res.status(err.code).json({isSuccess : 0});
+        }  
+        else
+            res.render('index', poems);
+    });
+});
+
+
+router.put('/modifyPoem', function(req, res){
+    var title = req.body.title;
+    var poetName = req.body.poetName;
+    var contents = req.body.contents;
+    var picUrl = req.body.picUrl;
+    var introPoet = req.body.introPoet;
+    var linkToBook = req.body.linkToBook;
+    var picUrlOfPoet = req.body.picUrlOfPoet;
+    var pushDueDay = req.body.pushDueDay;
+    var poemId = req.body.poemId;
+    
+    
+    Poem.findOne({poemId : poemId}).exec(function(err, poem){
+        
+        if(err){
+            return res.status(err.code).json({isSuccess : 0});
+        }
+        else{
+            if(title)
+                poem.title = title;
+            if(poetName)
+                poem.poetName = poetName;
+            if(contents)
+                poem.contents = contents;
+            if(picUrl)
+                poem.picUrl = picUrl;
+            if(introPoet)
+                poem.introPoet = introPoet;
+            if(linkToBook)
+                poem.linkToBook =linkToBook;
+            if(picUrlOfPoet)
+                poem.picUrlOfPoet = picUrlOfPoet;
+            if(pushDueDay)
+                poem.pushDueDay = pushDueDay;
+            
+            
+            poem.save(function(err){
+                if(err){
+                    console.log(err);
+                    return res.status(err.code).json({isSuccess : 0});
+                } 
+            });
+        }
+    });
+});
+
 router.get('/getPoem', function(req, res, next) {
     var page = req.query.page;
     var num = Number(req.query.num);    
@@ -37,22 +96,25 @@ router.get('/getPoem', function(req, res, next) {
 // file uploading. 
 router.post("/addPoem/", function(req, res, next){
     var title = req.body.title;
-    var author = req.body.author;
+    var poetName = req.body.poetName;
     var contents = req.body.contents;
     var picUrl = req.body.picUrl;
     var introPoet = req.body.introPoet;
     var linkToBook = req.body.linkToBook;
     var picUrlOfPoet = req.body.picUrlOfPoet;
-    
+    var pushDueDay = req.body.pushDueDay;
+    var poemId = "poem-" + Date.now();
     
     var poem = new Poem({
+        poemId : poemId,
         title : title,
-        author : author,
+        poetName : poetName,
         introPoet : introPoet,
         linkToBook : linkToBook,
         picUrlOfPoet : picUrlOfPoet,
         contents : contents,
-        picUrl : picUrl
+        picUrl : picUrl,
+        pushDueDay : pushDueDay
     });
     
     poem.save(function(err, poem){

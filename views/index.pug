@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div(align="center")
+  div(align="center" )
     img(src="../images/logo.png" width = "250", height= "100")
     br
     br
@@ -9,30 +9,31 @@ block content
       b Welcome to Jieumjigi :^) 
     br
     div 
-      b Poem Registeration Page.
+      b Poem Registration Page.
     br
-    br
-    form(action="/poem/addPoem" method="POST")
-        input(type="text" name="title" placeholder="Title of Poem")
+    
+    form.form-inline(action="/poem/addPoem" method="POST")
+      div.container(class= "form-group row" )
+        input.form-control(type="text" name="title"  placeholder="Title of Poem")
+        |  
+        input.form-control(type="text" name="poetName" placeholder="Poet name" )
         br
         br
-        
-        input(type="text" name="author" placeholder="Poet name")
+        input.form-control(type="text" name="introPoet" placeholder="Introducttion of poet")
+        |  
+        input.form-control(type="text" name="linkToBook" placeholder="Address to the book link")
         br
         br
-        input(type="text" name="introPoet" placeholder="Introducttion of poet")
+        input.form-control(type="text" name="picUrlOfPoet" placeholder="Picture URL of poet.")
+        |  
+        input.form-control(type="text" name="pushDueDay" placeholder = "Push Due (ex: 2017-03-14)")
         br
         br
-        input(type="text" name="linkToBook" placeholder="Address to the book link")
+        input.form-control(type="text" name="picUrl" placeholder = "Background Image URL")
         br
         br
-        input(type="text" name="picUrlOfPoet" placeholder="Picture URL of poet.")
+        textarea.form-control(placeholder="Poem Contents" name="contents" cols = "50" rows="20")
         br
         br
-        input(type="text" name="picUrl" placeholder = "Background Image URL")
-        br
-        br
-        textarea(placeholder="Poem Contents" name="contents" cols = "50" rows="10")
-        br
-        br
-        input(type="submit" value="Submit") 
+        input(type="submit" class="btn btn-default" value='Submit ✓') 
+    
