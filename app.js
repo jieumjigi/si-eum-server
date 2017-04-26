@@ -5,7 +5,7 @@ var mongoose =require('mongoose');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var methodOverride = require("method-override")
+var methodOverride = require("method-override");
 var index = require('./routes/index');
 var users = require('./routes/users');
 var poem = require('./routes/poem');
@@ -73,8 +73,7 @@ app.use(function(request, response, next) {
   next();
 });
 
-
-app.listen(process.env.PORT, function(){
+app.listen(process.env.PORT || 8080, function(){
     console.log("Server is running!");
 });
 

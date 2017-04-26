@@ -2,7 +2,27 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css")
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/manager.css')
+    //link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css")
   body
+    .header
+      a(href="/")
+        img.logo(src="../img/logo.png")
+      ul
+        li
+          a(href="/manager/poem") Poem Manager
+        li
+          a(href="/manager/user") User Manager
+        li
+          a(href="/") My Page
+
     block content
+
+    .footer
+      ul
+        li
+          a(href="https://jieumjigi.github.io/") Jieum Blog
+    script(src="/js/jquery-min.js")
+    script(src="/js/partial.js")
+    script(src="/js/poem.js")

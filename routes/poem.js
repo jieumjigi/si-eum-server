@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Poem = require("../models/poem");
-
+var moment = require("moment-timezone");
 
 
 router.get('/', function(req, res, next) {
@@ -123,5 +123,29 @@ router.post("/addPoem/", function(req, res, next){
     
     return res.status(201).redirect('/');
 });
+
+router.get("/poemOfToday/", function(req, res, next){
+    
+    var today = moment().tz('Asia/Tokyo').format('YYYY-MM-DD');
+    Poem.find({pushDueDate : today}).exec(function(err, poem){
+        if(err) return res.status(err.code).json({isSuccess: 0, err : err});
+        return res.status(200).json({isSuccess: 1, poem : poem});
+    });
+});
+
+router.post("/poemsOfpoet/", function(req, res, next){
+   
+    var poet = req.body.poetName;
+    console.log(poet);
+    Poem.find({poetName : poet}).exec(function(err, poems){
+        if(err) return res.status(err.code).json({isSuccess: 0, err : err});
+        return res.status(200).json({isSuccess: 1, poems : poems});
+    });
+    
+});
+
+
+
+
 
 module.exports = router;
