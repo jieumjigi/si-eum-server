@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "commit": "git add . && git commit -m 'auto commit'",
     "push": "git push -u origin master",
     "pull": "git pull",
