@@ -11,18 +11,19 @@ html
         img.logo(src="../img/logo.png")
       ul
         li
-          a(href="/manager/poem") Poem Manager
+          a(href="/poem/create") 시 등록하기
         li
-          a(href="/manager/user") User Manager
+          a(href="/poem/update") 시 목록보기
         li
-          a(href="/") My Page
+          a(href="https://jieumjigi.github.io/") 블로그
 
     block content
 
     .footer
-      ul
-        li
-          a(href="https://jieumjigi.github.io/") Jieum Blog
+      //ul
+      //  li
+      //    a(href="https://jieumjigi.github.io/") Jieum Blog
     script(src="/js/jquery-min.js")
+    script(src="/js/moment.min.js")
     script(src="/js/partial.js")
     script(src="/js/poem.js")
