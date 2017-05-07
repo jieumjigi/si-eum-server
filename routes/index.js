@@ -3,15 +3,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Jieum' });
+  res.redirect('/poem/create');
+  // res.render('index', { title: 'Jieum' });
 });
 
-router.get('/manager/poem', function(req, res, next) {
-  res.render('poemManager', { title: 'Jieum - Poem Manager' });
+router.get('/poem/create', function(req, res, next) {
+  res.render('poemCreate', { title: 'Jieum - Poem Create' });
 });
 
-router.get('/manager/user', function(req, res, next) {
-  res.render('userManager', { title: 'Jieum - User Manager' });
+router.get('/poem/update', function(req, res, next) {
+  res.render('poemUpdate', { title: 'Jieum - Poem Update' });
 });
 
 module.exports = router;
