@@ -65,3 +65,13 @@ body > .footer {
   padding: 30px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+li.card {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+li.card label {
+  margin-right: 8px;
+  font-weight: bold;
+}
