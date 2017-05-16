@@ -1,0 +1,67 @@
+html, body {
+  padding: 0px;
+  margin: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #5773a3;
+  background-color: #e0e8e0;
+}
+
+a {
+  color: #5773a3;
+  text-decoration: none;
+}
+
+body > .header {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+}
+
+body > .header img.logo {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  height: 30px;
+}
+
+body > .header > ul {
+  padding: 0;
+  margin: 0;
+}
+
+body > .header > ul > li {
+  display: inline-block;
+  list-style: none;
+  padding: 10px;
+}
+
+body > .header > ul > li:last-child {
+  padding-right: 50px;
+}
+
+body > .footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.container {
+  padding: 10px;
+  margin: 10px;
+}
+
+.card {
+  border-radius: 5px;
+  background-color: white;
+  padding: 30px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}

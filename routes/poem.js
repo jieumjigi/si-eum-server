@@ -20,7 +20,7 @@ router.put('/modifyPoem', function(req, res){
     var title = req.body.title;
     var poetName = req.body.poetName;
     var contents = req.body.contents;
-    var picUrl = req.body.picUrl;
+    var question = req.body.question;
     var introPoet = req.body.introPoet;
     var linkToBook = req.body.linkToBook;
     var picUrlOfPoet = req.body.picUrlOfPoet;
@@ -40,8 +40,8 @@ router.put('/modifyPoem', function(req, res){
                 poem.poetName = poetName;
             if(contents)
                 poem.contents = contents;
-            if(picUrl)
-                poem.picUrl = picUrl;
+            if(question)
+                poem.picUrl = question;
             if(introPoet)
                 poem.introPoet = introPoet;
             if(linkToBook)
@@ -98,7 +98,7 @@ router.post("/addPoem/", function(req, res, next){
     var title = req.body.title;
     var poetName = req.body.poetName;
     var contents = req.body.contents;
-    var picUrl = req.body.picUrl;
+    var question = req.body.question;
     var introPoet = req.body.introPoet;
     var linkToBook = req.body.linkToBook;
     var picUrlOfPoet = req.body.picUrlOfPoet;
@@ -113,10 +113,10 @@ router.post("/addPoem/", function(req, res, next){
         linkToBook : linkToBook,
         picUrlOfPoet : picUrlOfPoet,
         contents : contents,
-        picUrl : picUrl,
+        question : question,
         pushDueDate : pushDueDate
     });
-    
+
     poem.save(function(err, poem){
         if(err) return res.status(err.code).json({isSuccess: 0, err : err});
     });

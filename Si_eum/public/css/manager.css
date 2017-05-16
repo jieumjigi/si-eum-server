@@ -1,0 +1,65 @@
+#poemManager .header, #userManager .header {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#poemManager .body, #userManager .body {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#poemManager .form, #userManager .form {
+  display: flex;
+  justify-content: center;
+  width: 500px;
+}
+
+#poemManager .form input {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 2px;
+  margin: 5px;
+  display: block;
+}
+
+#poemManager .textarea textarea {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  padding: 3px;
+  margin: 5px;
+  width: 425px;
+}
+
+#poemManager .textarea label {
+  display: block;
+}
+
+#poemManager .input_group {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#poemManager .input_group .input {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#poemManager .poet_content textarea {
+  height: 100px;
+}
+
+#poemManager .btn_group {
+  margin-left: 210px;
+}
+
+#poemManager .btn_group button {
+  border: none;
+  border-radius: 3px;
+  background-color: #ff5d96;
+  color: white;
+  padding: 10px;
+  width: 60px;
+  font-weight: 300;
+}

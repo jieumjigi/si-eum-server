@@ -18,7 +18,7 @@ var poemSchema = new mongoose.Schema({
     type: String, 
     required: true
   },
-  picUrl: {
+  question: {
     type: String
   },
   pushDueDate: String,

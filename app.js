@@ -20,6 +20,19 @@ db.once("open", function() {
   console.log("Database is connected");
 });
 
+var gcs = require('@google-cloud/storage')({
+  projectId: "si-eum-165814",
+  keyFilename: './config/keyfile',
+  credentials: require('./config/keyfile')
+});
+
+var options = {
+    entity: 'allUsers',
+    role: gcs.acl.READER_ROLE
+  };
+  
+var bucket = gcs.bucket("si-eum-165814.appspot.com");
+
 mongoose.Promise = require('bluebird');
 
 var app = express();

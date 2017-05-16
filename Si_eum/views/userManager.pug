@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  .container#userManager
+    .header
+      h2 유저 관리
+    .body
+      .form.card
+        form(action="/poem/addPoem" method="POST")
+          .input_group
+            .title.input
+              label 작품명
+              input(type="text" name="title")
+            .poet_name.input
+              label 작가명
+              input(type="text" name="poetName")
+          .poet_info.textarea
+            label 작품 소개
+            textarea(name="introPoet")
+          .poet_content.textarea
+            label 시 내용
+            textarea(name="contents")
+          .input_group
+            .book_link.input
+              label 도서 링크
+              input(type="text" name="linkToBook")
+            .pic_link.input
+              label 사진 링크
+              input(type="text" name="picUrlOfPoet")
+            .bg_img_link.input
+              label 배경 이미지 링크
+              input(type="text" name="picUrl")
+          .input_group
+            .push_date.input
+              label 게시 일자
+              input(type="date" name="pushDueDay")
+            .btn_group.input
+              button.submit(type="submit") 저장
+
