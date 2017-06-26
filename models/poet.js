@@ -1,12 +1,8 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird');
 
-var poemSchema = new mongoose.Schema({
-  poemId : String, 
-  title:{
-    type: String,
-    required: true
-  },
+var poetSchema = new mongoose.Schema({
+  poetId : String, 
   poetName : {
     type : String,
     required : true
@@ -24,19 +20,15 @@ var poemSchema = new mongoose.Schema({
   profession : {
     type: String
   },
-  pushDueDate: String,
-  published_date: {
-    type: Date,
-    default: Date.now
+  registered_date: {
+    type: String
   }
-  
 });
 
-poemSchema.pre("save", function(next) {
+poetSchema.pre("save", function(next) {
   return next();
 });
 
+var poet = mongoose.model("Poet", poetSchema);
 
-var poem = mongoose.model("Poem", poemSchema);
-
-module.exports = poem;
+module.exports = poet;

@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.put('/modifyPoem', function(req, res){
+router.put('/modifyPoem/:poemId', function(req, res){
     var title = req.body.title;
     var poetName = req.body.poetName;
     var contents = req.body.contents;
@@ -25,15 +25,19 @@ router.put('/modifyPoem', function(req, res){
     var linkToBook = req.body.linkToBook;
     var picUrlOfPoet = req.body.picUrlOfPoet;
     var pushDueDate = req.body.pushDueDate;
-    var poemId = req.body.poemId;
-    
+    var profession = req.body.profession;
+    var poemId = req.params.poemId;
+    console.log(poemId);
     
     Poem.findOne({poemId : poemId}).exec(function(err, poem){
         
         if(err){
             return res.status(err.code).json({isSuccess : 0});
         }
+        else if(poem == null)
+            return res.status(204).json({isSuccess : 0, msg: "No contents"});
         else{
+            
             if(title)
                 poem.title = title;
             if(poetName)
@@ -50,13 +54,16 @@ router.put('/modifyPoem', function(req, res){
                 poem.picUrlOfPoet = picUrlOfPoet;
             if(pushDueDate)
                 poem.pushDueDate = pushDueDate;
+            if(profession)
+                poem.profession = profession;
             
             
             poem.save(function(err){
                 if(err){
                     console.log(err);
                     return res.status(err.code).json({isSuccess : 0});
-                } 
+                }
+                return res.status(200).json({isSuccess : 1});
             });
         }
     });
@@ -103,6 +110,7 @@ router.post("/addPoem/", function(req, res, next){
     var linkToBook = req.body.linkToBook;
     var picUrlOfPoet = req.body.picUrlOfPoet;
     var pushDueDate = req.body.pushDueDate;
+    var profession = req.body.profession;
     var poemId = "poem-" + Date.now();
     
     var poem = new Poem({
@@ -114,6 +122,7 @@ router.post("/addPoem/", function(req, res, next){
         picUrlOfPoet : picUrlOfPoet,
         contents : contents,
         question : question,
+        profession : profession,
         pushDueDate : pushDueDate
     });
 
@@ -157,6 +166,31 @@ router.delete("/deletePoem/", function(req, res, next) {
             return res.status(200).json({error : "Successfully deleted one poem.", isSuccess : 1});
         }
     });
+})
+
+router.put("/setPicUrl/", function(req, res, next) {
+    var poemId = req.body.poemId;
+    var picUrl = req.body.picUrl;
+    
+    Poem.findOne({poemId : poemId}).exec(function(err, poem){
+        
+        if(err){
+            return res.status(err.code).json({isSuccess : 0});
+        }
+        else{
+            if(picUrl){
+                poem.picUrlOfPoet = picUrl;
+            }
+            
+            poem.save(function(err){
+                if(err){
+                    console.log(err);
+                    return res.status(err.code).json({isSuccess : 0});
+                } 
+            });
+        }
+    });
+    
 })
 
 

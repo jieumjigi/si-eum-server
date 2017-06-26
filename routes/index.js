@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var multiparty=require('multiparty');
-
+var Version = require("../models/version");
+var moment = require("moment-timezone");
 var gcs = require('@google-cloud/storage')({
   projectId: "si-eum-165814",
   keyFilename: '../config/keyfile',
@@ -91,4 +92,36 @@ router.post("/uploadImage", function(req, res){
 });
 
 
+//version check 
+router.get("/version", function(req, res, next) {
+    Version.findOne().exec(function(err, version){
+        if(err)
+            return res.status(err.code).json({isSuccess : 0});
+        else
+            return res.status(200).json(version);
+    });
+});
+
+
+router.put("/version", function(req, res) {
+    
+    var newVersion = req.body.version;
+    var today = moment().tz('Asia/Tokyo').format('YYYY-MM-DD');
+    
+    Version.findOne({"_id": "5940246bb9a6c7093c3caec9"},function(err, version){
+        if(err)
+            return res.status(err.code).json({isSuccess : 0});
+        else{
+            version.version = newVersion;
+            version.published_date = today;
+        
+            version.save(function(err, poem){
+                if(err) return res.status(err.code).json({isSuccess: 0, err : err});
+            });
+            
+            return res.status(201).json({isSuccess: 1});
+        }    
+    });
+    
+});
 module.exports = router;

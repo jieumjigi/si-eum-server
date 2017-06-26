@@ -8,7 +8,7 @@ _.each(
       _($.get, '/poem/getPoem'),
       _.v('items'),
       _.t('items', '\
-          ul {{_.go(items, ', _.teach("item", "\
+          ul {{_.go(items, ', _renderPoemCard = _.teach("item", "\
             li.card\
               .origin\
                 .title \
@@ -32,6 +32,7 @@ _.each(
                     게시 예정일\
                   span {{moment(item.pushDueDate).format('YY/MM/DD')}} ({{moment(item.pushDueDate, 'YYYYMMDD').fromNow()}})\
                 .options\
+                  button.delete 삭제\
                   button.edit 수정\
               .editor[hidden]\
                 .title \
@@ -68,33 +69,51 @@ _.each(
       $dTarget.find('.origin').hide();
     }
   )),
+  _('on', 'click', 'button.delete', __(
+    _.v('delegateTarget'), $,
+    function($e) {
+      if (confirm("정말로 삭제하시겠습니까?")) {
+        return _.mr($.ajax({
+          method: 'DELETE',
+          url: '/poem/deletePoem/',
+          data:{ 'poemId': $e.find('input[name=poemId]').val() }
+        }), $e)
+      }
+    },
+    function(res, $e) { return res && res.isSuccess && $e.remove() }
+  )),
   _('on', 'click', 'button.cancel', __(
     _.v('delegateTarget'), $,
-    function($dTarget) {
-      $dTarget.find('.editor').hide();
-      $dTarget.find('.origin').show();
+    function($e) {
+      $e.find('.editor').hide();
+      $e.find('.origin').show();
     }
   )),
   _('on', 'click', 'button.done', __(
     _.v('delegateTarget'), $,
-    _.all(
-      __(
+    function($e) {
+      return _.go($e,
         _('find', 'input, textarea'),
         _.reduce(function(obj, $inputs) {
           if (!$inputs.value) return obj;
           return obj[$inputs.name] = $inputs.value, obj;
         }, {}),
-        $.put("/poem/modifyPoem/")
-      ),
-      function($dTarget) {
-        $dTarget.find('.editor').hide();
-        $dTarget.find('.origin').show();
+        function(poemData) {
+          var url = '/poem/modifyPoem/'+poemData.poemId;
+          return _.mr($.put(url)(poemData), poemData, $e)
+        })
+    },
+    function(res, data, $oe) {
+      if (res.isSuccess) {
+        var $ne = $(_renderPoemCard(data));
+        $oe.find('.editor').replaceWith($ne.find('.editor'));
+        $oe.find('.origin').replaceWith($ne.find('.origin'));
       }
-    )
+    }
   )),
 
   _.c('.form.card'), $,
-  _('on', 'click', 'button.submit', __(
+  _('on', 'click', 'button.submit', ___(
     _.v('delegateTarget'), $,
     _.tap(
       _('find', 'input:file'),
