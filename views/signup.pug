@@ -4,12 +4,17 @@ block content
   .container#welcome
     .header
       center
-        h2 안녕하세요, 시음입니다.
+        h2 시음과 함께하기
     center
       .body(style="width:33%")
         .form.card
-            form(action="/user/login" method="POST")
+            form(action="/user/signup" method="POST")
               .input_group
+                .name.input
+                  label 이름
+                  |
+                  input(type="text" name="name")
+                br
                 .email.input
                   label 이메일
                   | 
@@ -23,5 +28,5 @@ block content
               .input_group
                 .btn_group.input
                   center
-                    button.submit(type="submit") 로그인
+                    button.submit(type="submit") 회원가입
 
