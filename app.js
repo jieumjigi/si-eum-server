@@ -3,12 +3,15 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var poem = require('./routes/poem');
 var admin = require('./routes/admin');
 
@@ -36,6 +39,7 @@ var bucket = gcs.bucket("si-eum-165814.appspot.com");
 mongoose.Promise = require('bluebird');
 
 var app = express();
+require('./config/passport')(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,9 +52,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/poem', poem);
 app.use('/admin', admin);
 

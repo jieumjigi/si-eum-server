@@ -12,8 +12,8 @@ var gcs = require('@google-cloud/storage')({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.redirect('/poem/create');
-  // res.render('index', { title: 'Jieum' });
+//   res.redirect('/poem/create');
+  res.render('index', { title: 'Jieum' });
 });
 
 router.get('/poem/create', function(req, res, next) {
