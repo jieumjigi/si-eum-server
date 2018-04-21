@@ -15,8 +15,15 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/create', function(req, res, next) {
+    if (req.session) {
+        console.log("req 로그인 되었습니다");
+        console.log(req.sessionID);
+    }
+    res.render('poemCreate', { title: 'Jieum - Poem Create' });
+});
 
-router.put('/modifyPoem/:poemId', function(req, res){
+router.put('/modifyPoem/', function(req, res){
     var title = req.body.title;
     var poetName = req.body.poetName;
     var contents = req.body.contents;

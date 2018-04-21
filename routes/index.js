@@ -16,10 +16,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Jieum' });
 });
 
-router.get('/poem/create', function(req, res, next) {
-  res.render('poemCreate', { title: 'Jieum - Poem Create' });
-});
-
 router.get('/poem/update', function(req, res, next) {
   res.render('poemUpdate', { title: 'Jieum - Poem Update' });
 });
